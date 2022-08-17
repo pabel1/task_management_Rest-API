@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 // registation
 const regiController = async (req, res) => {
   try {
-    const hashPassword = await bcrypt.hash(req.body.password, 10);
+    const hashPassword = await bcrypt.hash(req.body.password,10);
     const user = new UserModel({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
