@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
 
 // security middleware import
 const helmet = require("helmet");
@@ -27,6 +28,7 @@ app.use(hpp());
 app.use(mongoSanitize());
 app.use(cors());
 app.use(xss());
+app.use(bodyParser.json());
 
 // rate limit
 const rateLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 3000 });
@@ -34,7 +36,7 @@ app.use(rateLimiter);
 
 // databse connection
 mongoose
-  .connect(process.env.DATABASE_URL ||4000, {
+  .connect(process.env.DATABASE_URL ||5000, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
