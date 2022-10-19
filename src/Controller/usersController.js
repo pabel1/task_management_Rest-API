@@ -12,9 +12,11 @@ const regiController = async (req, res) => {
       email: req.body.email,
       password: hashPassword,
       photo: req.body.photo,
+      phone:req.body.phone,
     });
     await user.save();
     res.status(200).json({
+      data:user,
       massege: "data insert was successfull!",
     });
   } catch (error) {
@@ -53,6 +55,7 @@ const loginController = async (req, res) => {
         res.status(200).json({
           access_token: token,
           message: "Login successful!",
+          userData:user,
         });
       } else {
         res.status(401).json({
