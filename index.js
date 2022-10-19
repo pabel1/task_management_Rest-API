@@ -28,7 +28,13 @@ app.use(hpp());
 app.use(mongoSanitize());
 app.use(cors());
 app.use(xss());
+
+app.use(express.json({limit:'50mb'}));
+app.use(express.urlencoded({limit:'50mb'}));
+
 app.use(bodyParser.json());
+
+
 
 // rate limit
 const rateLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 3000 });
