@@ -163,11 +163,10 @@ const recoverPassword = async (req, res) => {
    const user= await UserModel.findOne({email:email})
     // console.log(user);
     if (user) {
+      const newHashPassword = await bcrypt.hash(newPassword, 10);
       let updatePassword = await UserModel.updateOne(
         { email: email},
-        {
-          password:newPassword
-        }
+        { $set: { password: newHashPassword } }
       );
       res.status(200).json({
          status: "success",
